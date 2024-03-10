@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ChirpController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChirpController;
+use App\Http\Controllers\ProfileController;
+use App\Models\Gig;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +21,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/posts/{id}', function($id) {
-    return response('<h1>Hello world : '.$id.'</h1>',200);
+Route::get('/gigs', function () {
+    return view('gigs', [
+        'heading' => 'Latest Gigs',
+        'gigs' => Gig::all()
+    ]); 
 });
+
+Route::get('/gig/{id}', function ($id) {
+    return view('gig', [
+        'heading' => 'Single Gig',
+        'gig' => Gig::find($id)
+    ]); 
+});
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
