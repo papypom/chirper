@@ -28,10 +28,10 @@ Route::get('/gigs', function () {
     ]); 
 });
 
-Route::get('/gig/{id}', function ($id) {
+Route::get('/gig/{gig}', function (Gig $gig) {
     return view('gig', [
         'heading' => 'Single Gig',
-        'gig' => Gig::find($id)
+        'gig' => $gig
     ]); 
 });
 
