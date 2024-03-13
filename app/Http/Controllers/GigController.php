@@ -12,6 +12,9 @@ class GigController extends Controller
     }
 
     public function show() 
+    {
+        
+    }
 
     //Show single listing 
 }
