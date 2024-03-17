@@ -1,8 +1,6 @@
-@extends('layout')
-
-@section('content')
+<x-layout>
     @include('partials._search')
-    <a href="/gigs" class="inline-block text-black ml-4 mb-4"><i class="fa-solid fa-arrow-left"></i> Back
+    <a href="/gigs" class="inline-block text-black ml-4 mb-4"><i class="fa-solid fa-arrow-left"></i> <i class="fa fa-circle-notch fa-spin mr-2"></i>Back
     </a>
     <div class="mx-4">
         <x-card class="!p-10"> 
@@ -38,4 +36,4 @@
             </div>
         </x-card>
     </div>
-@endsection
+</x-layout>

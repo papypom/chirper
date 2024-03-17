@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChirpController;
+use App\Http\Controllers\GigController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Gig;
 
@@ -21,20 +22,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/gigs', function () {
-    return view('gigs', [
-        'heading' => 'Latest Gigs',
-        'gigs' => Gig::all()
-    ]); 
-});
+Route::get('/gigs', [GigController::class, 'index']);
 
-Route::get('/gig/{gig}', function (Gig $gig) {
-    return view('gig', [
-        'heading' => 'Single Gig',
-        'gig' => $gig
-    ]); 
-});
+Route::get('/gigs/create', [GigController::class, 'create']); 
 
+Route::post('/gigs', [GigController::class, 'store']); 
+
+Route::get('/gigs/{gig}', [GigController::class, 'show']);
 
 
 Route::get('/dashboard', function () {
