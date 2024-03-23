@@ -9,7 +9,7 @@ class Gig extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'company', 'location', 'description', 'website', 'email','tags'];
+    protected $fillable = ['title', 'company', 'location', 'description', 'website', 'email','tags', 'logo'];
 
     public function scopeFilter($query, array $filters)
     {

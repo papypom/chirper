@@ -27,9 +27,10 @@ class GigController extends Controller
         return view('gigs.create'); 
     }
 
-    public function store() 
+    public function store(Request $request) 
     {
-        $formFields = request()->validate([
+
+        $formFields = $request->validate([
             'title' => 'required',
             'company' => ['required',Rule::unique('gigs','company')],
             'location' => 'required',
@@ -39,9 +40,51 @@ class GigController extends Controller
             'description' => 'required'
         ]);
 
+
+        if ($request->hasFile('logo')) {
+            $formFields['logo'] = $request->file('logo')->store('logos','public');
+        };
+
+
         Gig::create($formFields);
 
         return redirect('/gigs')-> with('success', 'Gig created successfully!');
+    }
+
+    public function edit(Gig $gig) {
+        return view('gigs.edit',['gig' => $gig]);
+    }
+
+    public function update(Request $request, Gig $gig) 
+    {
+
+        $formFields = $request->validate([
+            'title' => 'required',
+            'company' => 'required',
+            'location' => 'required',
+            'website' => 'required',
+            'email' => ['required','email'],
+            'tags' => '',
+            'description' => 'required'
+        ]);
+
+
+        if ($request->hasFile('logo')) {
+            $formFields['logo'] = $request->file('logo')->store('logos','public');
+        };
+
+
+        $gig->update($formFields);
+
+        return redirect('/gigs/'.$gig->id)-> with('success', 'Gig updated successfully!');
+    }
+
+    public function destroy(Gig $gig) 
+    {
+
+        $gig->delete();
+
+        return redirect('/gigs')-> with('success', 'Gig deleted successfully!');
     }
 
 

@@ -1,11 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\GigController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Gig;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +26,12 @@ Route::get('/gigs/create', [GigController::class, 'create']);
 
 Route::post('/gigs', [GigController::class, 'store']); 
 
+Route::get('/gigs/{gig}/edit', [GigController::class, 'edit']);
+
+Route::put('/gigs/{gig}', [GigController::class, 'update']);
+
+Route::delete('/gigs/{gig}', [GigController::class, 'destroy']);
+
 Route::get('/gigs/{gig}', [GigController::class, 'show']);
 
 
@@ -44,5 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
 
 require __DIR__ . '/auth.php';
